@@ -4,11 +4,12 @@ import org.seasar.doma.Dao;
 import org.seasar.doma.Select;
 
 import sample.config.SampleConfig;
+import sample.entity.User;
 
 @Dao(config = SampleConfig.class)
 public interface UserDao {
 
 	@Select
-	int selectByKey(Long id);
+	User selectByKey(Long id);
 
 }

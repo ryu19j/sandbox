@@ -1,0 +1,1 @@
+select /*%expand*/* from usr where id = /* id */0
