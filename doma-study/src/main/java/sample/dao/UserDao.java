@@ -1,6 +1,7 @@
 package sample.dao;
 
 import org.seasar.doma.Dao;
+import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
 
 import sample.config.SampleConfig;
@@ -11,5 +12,8 @@ public interface UserDao {
 
 	@Select
 	User selectByKey(Long id);
+
+	@Insert(sqlFile = true)
+	int insert(User user);
 
 }
