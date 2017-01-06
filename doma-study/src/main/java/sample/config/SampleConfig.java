@@ -20,7 +20,7 @@ public class SampleConfig implements Config {
 
 	private SampleConfig() {
 		dialect = new PostgresDialect();
-		dataSource = new LocalTransactionDataSource("jdbc:postgresql://localhost:5432/testdb", "", "");
+		dataSource = new LocalTransactionDataSource("jdbc:postgresql://localhost:5432/testdb", "ryu", "ryu");
 		transactionManager = new LocalTransactionManager(dataSource.getLocalTransaction(getJdbcLogger()));
 	}
 

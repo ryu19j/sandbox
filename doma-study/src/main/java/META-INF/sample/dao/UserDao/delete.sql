@@ -1,0 +1,1 @@
+delete from usr where id = /* user.id */0

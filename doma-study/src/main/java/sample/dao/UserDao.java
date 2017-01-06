@@ -1,6 +1,7 @@
 package sample.dao;
 
 import org.seasar.doma.Dao;
+import org.seasar.doma.Delete;
 import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
 import org.seasar.doma.Update;
@@ -19,4 +20,7 @@ public interface UserDao {
 
 	@Update(sqlFile = true)
 	int update(User user);
+
+	@Delete(sqlFile = true)
+	int delete(User user);
 }

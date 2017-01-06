@@ -22,7 +22,7 @@ public class UserDaoTest {
 			insertUser.name = "test";
 			dao.insert(insertUser);
 		});
-		
+
 		tm.required(() -> {
 			User user = dao.selectByKey(1L);
 			assertEquals(user.name, "test");
@@ -46,7 +46,7 @@ public class UserDaoTest {
 		});
 
 	}
-	
+
 	@Test
 	public void testUpdate() {
 		TransactionManager tm = SampleConfig.singleton().getTransactionManager();
@@ -57,7 +57,7 @@ public class UserDaoTest {
 			user.name = "test3";
 			dao.insert(user);
 		});
-		
+
 		tm.required(() -> {
 			user.id = 3L;
 			user.name = "test3Update";
@@ -67,6 +67,30 @@ public class UserDaoTest {
 		tm.required(() -> {
 			User user1 = dao.selectByKey(3L);
 			assertEquals(user1.name, "test3Update");
+		});
+	}
+
+	@Test
+	public void testDelete() {
+		TransactionManager tm = SampleConfig.singleton().getTransactionManager();
+		User user1 = new User();
+
+		tm.required(() -> {
+			user1.id = 4L;
+			user1.name = "test4";
+			dao.insert(user1);
+		});
+
+		User user2 = new User();
+		tm.required(() -> {
+			user2.id = 4L;
+			user2.name = "test4";
+			dao.delete(user2);
+		});
+
+		tm.required(() -> {
+			User user3 = dao.selectByKey(4L);
+			assertEquals(user3, null);
 		});
 
 	}
