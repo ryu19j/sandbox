@@ -1,5 +1,8 @@
 package sample.dao;
 
+import java.util.List;
+
+import org.seasar.doma.BatchInsert;
 import org.seasar.doma.Dao;
 import org.seasar.doma.Delete;
 import org.seasar.doma.Insert;
@@ -23,4 +26,7 @@ public interface UserDao {
 
 	@Delete(sqlFile = true)
 	int delete(User user);
+
+	@BatchInsert(sqlFile = true)
+	int[] batchInsert(List<User> users);
 }

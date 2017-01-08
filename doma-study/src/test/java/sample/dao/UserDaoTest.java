@@ -2,6 +2,9 @@ package sample.dao;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 import org.seasar.doma.jdbc.tx.TransactionManager;
 
@@ -91,6 +94,32 @@ public class UserDaoTest {
 		tm.required(() -> {
 			User user3 = dao.selectByKey(4L);
 			assertEquals(user3, null);
+		});
+
+	}
+
+	@Test
+	public void testBatchInsert() {
+		TransactionManager tm = SampleConfig.singleton().getTransactionManager();
+		User user1 = new User();
+		User user2 = new User();
+		List<User> users = new ArrayList<>();
+		users.add(user1);
+		users.add(user2);
+		tm.required(() -> {
+			user1.id = 5L;
+			user1.name = "test5";
+			user2.id = 6L;
+			user2.name = "test6";
+			dao.batchInsert(users);
+		});
+
+		tm.required(() -> {
+			User user3 = dao.selectByKey(5L);
+			assertEquals(user3.name, "test5");
+			User user4 = dao.selectByKey(6L);
+			assertEquals(user4.name, "test6");
+
 		});
 
 	}
