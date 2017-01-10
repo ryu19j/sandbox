@@ -19,18 +19,18 @@ public interface UserDao {
 	@Select
 	User selectByKey(Long id);
 
-	@Insert(sqlFile = true)
+	@Insert
 	int insert(User user);
 
-	@Update(sqlFile = true)
+	@Update
 	int update(User user);
 
-	@Delete(sqlFile = true)
+	@Delete
 	int delete(User user);
 
-	@BatchInsert(sqlFile = true)
+	@BatchInsert
 	int[] batchInsert(List<User> users);
 
-	@BatchUpdate(sqlFile = true)
+	@BatchUpdate
 	int[] batchUpdate(List<User> users);
 }

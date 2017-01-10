@@ -1,1 +1,0 @@
-UPDATE usr SET id=/* users.id */0, name=/* users.name */'test' WHERE id = /* users.id */0

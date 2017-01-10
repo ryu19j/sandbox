@@ -1,1 +1,0 @@
-INSERT INTO usr(id, name) VALUES (/* users.id */0, /* users.name */'test')
