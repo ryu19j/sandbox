@@ -2,6 +2,7 @@ package sample.dao;
 
 import java.util.List;
 
+import org.seasar.doma.BatchDelete;
 import org.seasar.doma.BatchInsert;
 import org.seasar.doma.BatchUpdate;
 import org.seasar.doma.Dao;
@@ -33,4 +34,7 @@ public interface UserDao {
 
 	@BatchUpdate
 	int[] batchUpdate(List<User> users);
+
+	@BatchDelete
+	int[] batchDelete(List<User> users);
 }
