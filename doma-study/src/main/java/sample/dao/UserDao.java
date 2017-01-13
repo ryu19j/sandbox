@@ -8,6 +8,7 @@ import org.seasar.doma.BatchUpdate;
 import org.seasar.doma.Dao;
 import org.seasar.doma.Delete;
 import org.seasar.doma.Insert;
+import org.seasar.doma.Script;
 import org.seasar.doma.Select;
 import org.seasar.doma.Update;
 
@@ -16,6 +17,12 @@ import sample.entity.User;
 
 @Dao(config = SampleConfig.class)
 public interface UserDao {
+
+	@Script
+	void createTable();
+
+	@Script
+	void dropTable();
 
 	@Select
 	User selectByKey(Long id);

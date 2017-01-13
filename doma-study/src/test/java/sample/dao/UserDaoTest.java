@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.seasar.doma.jdbc.tx.TransactionManager;
 
@@ -14,6 +15,15 @@ import sample.entity.User;
 public class UserDaoTest {
 
 	private final UserDao dao = new UserDaoImpl();
+
+	@Before
+	public void setup() {
+		TransactionManager tm = SampleConfig.singleton().getTransactionManager();
+		tm.required(() -> {
+			dao.dropTable();
+			dao.createTable();
+		});
+	}
 
 	@Test
 	public void testSelect() {
