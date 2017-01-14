@@ -198,4 +198,34 @@ public class UserDaoTest {
 			assertEquals(user4, null);
 		});
 	}
+
+	@Test
+	public void testSavePoint() {
+		TransactionManager tm = SampleConfig.singleton().getTransactionManager();
+		User user1 = new User();
+		User user2 = new User();
+		List<User> users = new ArrayList<>();
+		users.add(user1);
+		users.add(user2);
+		tm.required(() -> {
+			user1.id = 11L;
+			user1.name = "test11";
+			user2.id = 12L;
+			user2.name = "test12";
+			dao.batchInsert(users);
+
+			tm.setSavepoint("save");
+
+			dao.delete(user1);
+
+			tm.rollback("save");
+		});
+
+		tm.required(() -> {
+			User user3 = dao.selectByKey(11L);
+			assertEquals(user3.name, "test11");
+			User user4 = dao.selectByKey(12L);
+			assertEquals(user4.name, "test12");
+		});
+	}
 }
