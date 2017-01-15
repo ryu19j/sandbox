@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.seasar.doma.jdbc.tx.TransactionManager;
 
 import sample.config.SampleConfig;
+import sample.domain.PhoneNumber;
 import sample.entity.User;
 
 public class UserDaoTest {
@@ -226,6 +227,25 @@ public class UserDaoTest {
 			assertEquals(user3.name, "test11");
 			User user4 = dao.selectByKey(12L);
 			assertEquals(user4.name, "test12");
+		});
+	}
+
+	@Test
+	public void testSelectForDomain() {
+
+		TransactionManager tm = SampleConfig.singleton().getTransactionManager();
+		User insertUser = new User();
+		tm.required(() -> {
+			insertUser.id = 13L;
+			insertUser.name = "test13";
+			insertUser.phoneNumber = new PhoneNumber("0123-45-6789");
+			dao.insert(insertUser);
+		});
+
+		tm.required(() -> {
+			PhoneNumber number = new PhoneNumber("0123-45-6789");
+			User user = dao.selectByPhoneNumber(number);
+			assertEquals(user.phoneNumber.getValue(), "0123-45-6789");
 		});
 	}
 }

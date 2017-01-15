@@ -2,5 +2,6 @@ CREATE TABLE usr
 (
   id bigint NOT NULL,
   name character varying,
+  phone_number character varying,
   CONSTRAINT usr_pkey PRIMARY KEY (id)
 );

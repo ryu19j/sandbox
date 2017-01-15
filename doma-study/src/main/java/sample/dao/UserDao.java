@@ -13,6 +13,7 @@ import org.seasar.doma.Select;
 import org.seasar.doma.Update;
 
 import sample.config.SampleConfig;
+import sample.domain.PhoneNumber;
 import sample.entity.User;
 
 @Dao(config = SampleConfig.class)
@@ -26,6 +27,9 @@ public interface UserDao {
 
 	@Select
 	User selectByKey(Long id);
+
+	@Select
+	User selectByPhoneNumber(PhoneNumber phoneNumber);
 
 	@Insert
 	int insert(User user);
