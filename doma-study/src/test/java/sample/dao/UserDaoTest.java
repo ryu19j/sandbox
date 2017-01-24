@@ -32,14 +32,14 @@ public class UserDaoTest {
 		TransactionManager tm = SampleConfig.singleton().getTransactionManager();
 		User insertUser = new User();
 		tm.required(() -> {
-			insertUser.id = 1L;
-			insertUser.name = "test";
+			insertUser.setId(1L);
+			insertUser.setName("test");
 			dao.insert(insertUser);
 		});
 
 		tm.required(() -> {
 			User user = dao.selectByKey(1L);
-			assertEquals(user.name, "test");
+			assertEquals(user.getName(), "test");
 		});
 	}
 
@@ -49,14 +49,14 @@ public class UserDaoTest {
 		User user = new User();
 
 		tm.required(() -> {
-			user.id = 2L;
-			user.name = "test2";
+			user.setId(2L);
+			user.setName("test2");
 			dao.insert(user);
 		});
 
 		tm.required(() -> {
 			User user1 = dao.selectByKey(2L);
-			assertEquals(user1.name, "test2");
+			assertEquals(user1.getName(), "test2");
 		});
 
 	}
@@ -67,20 +67,20 @@ public class UserDaoTest {
 		User user = new User();
 
 		tm.required(() -> {
-			user.id = 3L;
-			user.name = "test3";
+			user.setId(3L);
+			user.setName("test3");
 			dao.insert(user);
 		});
 
 		tm.required(() -> {
-			user.id = 3L;
-			user.name = "test3Update";
+			user.setId(3L);
+			user.setName("test3Update");
 			dao.update(user);
 		});
 
 		tm.required(() -> {
 			User user1 = dao.selectByKey(3L);
-			assertEquals(user1.name, "test3Update");
+			assertEquals(user1.getName(), "test3Update");
 		});
 	}
 
@@ -90,15 +90,15 @@ public class UserDaoTest {
 		User user1 = new User();
 
 		tm.required(() -> {
-			user1.id = 4L;
-			user1.name = "test4";
+			user1.setId(4L);
+			user1.setName("test4");
 			dao.insert(user1);
 		});
 
 		User user2 = new User();
 		tm.required(() -> {
-			user2.id = 4L;
-			user2.name = "test4";
+			user2.setId(4L);
+			user2.setName("test4");
 			dao.delete(user2);
 		});
 
@@ -118,18 +118,18 @@ public class UserDaoTest {
 		users.add(user1);
 		users.add(user2);
 		tm.required(() -> {
-			user1.id = 5L;
-			user1.name = "test5";
-			user2.id = 6L;
-			user2.name = "test6";
+			user1.setId(5L);
+			user1.setName("test5");
+			user2.setId(6L);
+			user2.setName("test6");
 			dao.batchInsert(users);
 		});
 
 		tm.required(() -> {
 			User user3 = dao.selectByKey(5L);
-			assertEquals(user3.name, "test5");
+			assertEquals(user3.getName(), "test5");
 			User user4 = dao.selectByKey(6L);
-			assertEquals(user4.name, "test6");
+			assertEquals(user4.getName(), "test6");
 
 		});
 	}
@@ -143,33 +143,33 @@ public class UserDaoTest {
 		users.add(user1);
 		users.add(user2);
 		tm.required(() -> {
-			user1.id = 7L;
-			user1.name = "test7";
-			user2.id = 8L;
-			user2.name = "test8";
+			user1.setId(7L);
+			user1.setName("test7");
+			user2.setId(8L);
+			user2.setName("test8");
 			dao.batchInsert(users);
 		});
 
 		tm.required(() -> {
-			user1.id = 7L;
-			user1.name = "test7update";
-			user2.id = 8L;
-			user2.name = "test8update";
+			user1.setId(7L);
+			user1.setName("test7update");
+			user2.setId(8L);
+			user2.setName("test8update");
 			dao.batchUpdate(users);
 		});
 
 		tm.required(() -> {
 			User user3 = dao.selectByKey(7L);
-			assertEquals(user3.name, "test7update");
+			assertEquals(user3.getName(), "test7update");
 			User user4 = dao.selectByKey(8L);
-			assertEquals(user4.name, "test8update");
+			assertEquals(user4.getName(), "test8update");
 
 		});
 
 	}
 
 	@Test
-	public void testBatchUDelete() {
+	public void testBatchDelete() {
 		TransactionManager tm = SampleConfig.singleton().getTransactionManager();
 		User user1 = new User();
 		User user2 = new User();
@@ -177,18 +177,18 @@ public class UserDaoTest {
 		users.add(user1);
 		users.add(user2);
 		tm.required(() -> {
-			user1.id = 9L;
-			user1.name = "test9";
-			user2.id = 10L;
-			user2.name = "test10";
+			user1.setId(9L);
+			user1.setName("test9");
+			user2.setId(10L);
+			user2.setName("test10");
 			dao.batchInsert(users);
 		});
 
 		tm.required(() -> {
-			user1.id = 7L;
-			user1.name = "test7update";
-			user2.id = 8L;
-			user2.name = "test8update";
+			user1.setId(7L);
+			user1.setName("test7update");
+			user2.setId(8L);
+			user2.setName("test8update");
 			dao.batchDelete(users);
 		});
 
@@ -209,10 +209,10 @@ public class UserDaoTest {
 		users.add(user1);
 		users.add(user2);
 		tm.required(() -> {
-			user1.id = 11L;
-			user1.name = "test11";
-			user2.id = 12L;
-			user2.name = "test12";
+			user1.setId(11L);
+			user1.setName("test11");
+			user2.setId(12L);
+			user2.setName("test12");
 			dao.batchInsert(users);
 
 			tm.setSavepoint("save");
@@ -224,9 +224,9 @@ public class UserDaoTest {
 
 		tm.required(() -> {
 			User user3 = dao.selectByKey(11L);
-			assertEquals(user3.name, "test11");
+			assertEquals(user3.getName(), "test11");
 			User user4 = dao.selectByKey(12L);
-			assertEquals(user4.name, "test12");
+			assertEquals(user4.getName(), "test12");
 		});
 	}
 
@@ -236,16 +236,16 @@ public class UserDaoTest {
 		TransactionManager tm = SampleConfig.singleton().getTransactionManager();
 		User insertUser = new User();
 		tm.required(() -> {
-			insertUser.id = 13L;
-			insertUser.name = "test13";
-			insertUser.phoneNumber = new PhoneNumber("0123-45-6789");
+			insertUser.setId(13L);
+			insertUser.setName("test13");
+			insertUser.setPhoneNumber(new PhoneNumber("0123-45-6789"));
 			dao.insert(insertUser);
 		});
 
 		tm.required(() -> {
 			PhoneNumber number = new PhoneNumber("0123-45-6789");
 			User user = dao.selectByPhoneNumber(number);
-			assertEquals(user.phoneNumber.getValue(), "0123-45-6789");
+			assertEquals(user.getPhoneNumber().getValue(), "0123-45-6789");
 		});
 	}
 }
