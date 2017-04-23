@@ -9,3 +9,4 @@
 /*.ipr
 /*.iws
 /src/main/webapp/WEB-INF/classes/
+/twitter4j.properties
